@@ -15,6 +15,12 @@ export default function command(folder, options) {
 
 	var configPath = join(dir, 'polymerase.json');
 
+	// We only support API Gateway at this point
+	if(options.type && options.type != 'aws-apigateway') {
+		console.error('You specified an invalid service type.');
+		return process.exit(1);
+	}
+
 	try {
 		var configStat = statSync(configPath);
 
@@ -28,6 +34,8 @@ export default function command(folder, options) {
 			id: uuid(),
 			name: name,
 			version: '0.0.1',
+
+			type: 'aws-apigateway',
 
 			stages: {
 				default: 'default',

@@ -15,6 +15,7 @@ program
 program
 	.command('service:create [folder]')
 	.description('Create a new service in the specified folder')
+	.option('--type [type]', 'Type of service to create. Default: aws-apigateway')
 	.option('--name [name]', 'Name to use for the service')
 	.option('--description [description]', 'Description to use for the service')
 	.action(require('./commands/service-create'));
