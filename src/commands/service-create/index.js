@@ -36,6 +36,10 @@ export default function command(folder, options) {
 				]
 			},
 
+			regions: [
+				'us-east-1'
+			],
+
 			repository: {},
 
 			manifest: {

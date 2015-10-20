@@ -25,6 +25,16 @@ program
 	.option('--stage <stage>', 'Stage to deploy to');
 
 program
+	.command('service:region-add <region>')
+	.description('Add the service to the specified region')
+	.option('--service <folder>', 'Folder of the service to add the region for')
+
+program
+	.command('service:region-delete <region>')
+	.description('Remove the service from the specified region')
+	.option('--service <folder>', 'Folder of the service to remove the region for')
+
+program
 	.command('stage:create <name>')
 	.description('Create a new stage for the service with the specified name')
 	.option('--service <folder>', 'Folder of the service to create the stage for')
@@ -65,18 +75,21 @@ program
 	.command('config:list')
 	.description('List the configuration keys. It is not possible to retrieve the values')
 	.option('--stage <stage>', 'Stage to list the configuration items for')
+	.option('--region <region>', 'Region to list the configuration items for')
 	.option('--service <folder>', 'Folder of the service to list the configuration items for')
 
 program
 	.command('config:set <keyValuePair> [otherKeyValuePairs...]')
 	.description('Set one or more configuration item(s)')
 	.option('--stage <stage>', 'Stage to change the configuration items for')
+	.option('--region <region>', 'Region to set the configuration items for')
 	.option('--service <folder>', 'Folder of the service to set the configuration items for')
 
 program
 	.command('config:unset <key> [otherKeys...]')
 	.description('Unset the configuration key(s)')
 	.option('--stage <stage>', 'Stage to change the configuration items for')
+	.option('--region <region>', 'Region to unset the configuration items for')
 	.option('--service <folder>', 'Folder of the service to unset the configuration items for')
 
 program.parse(process.argv);
