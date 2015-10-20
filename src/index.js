@@ -11,7 +11,7 @@ require('babel/register')({
    // A lot of NPM modules are precompiled so Babel ignores node_modules/*
    // by default, but Needlepoint is NOT pre-compiled so we change the ignore
    // rules to ignore everything *except* Needlepoint.
-   ignore: /node_modules\/(?!needlepoint)/
+   ignore: /node_modules\/(?!needlepoint|polymerase\-.+)/
 });
 
 try {
