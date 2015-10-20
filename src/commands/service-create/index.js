@@ -7,6 +7,7 @@ import {readFileSync, statSync, unlinkSync, writeFileSync} from 'fs';
 import {basename, join, resolve} from 'path';
 
 import {sync as mkpath} from 'mkpath';
+import {v4 as uuid} from 'node-uuid';
 
 export default function command(folder, options) {
 	var dir = folder && folder.trim().length ? resolve(folder, '.') : process.cwd();
@@ -24,8 +25,16 @@ export default function command(folder, options) {
 		mkpath(dir);
 
 		var defaultConfig = {
+			id: uuid(),
 			name: name,
 			version: '0.0.1',
+
+			stages: {
+				default: 'default',
+				all: [
+					'default'
+				]
+			},
 
 			repository: {},
 
