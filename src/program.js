@@ -9,10 +9,6 @@ program
   .version(require('../package.json').version);
 
 program
-	.option('--access-key <key>', 'Access key used to authenticate with AWS')
-	.option('--secret-key <secret>', 'Secret key used to authenticate with AWS');
-
-program
 	.command('service:create [folder]')
 	.description('Create a new service in the specified folder')
 	.option('--type [type]', 'Type of service to create. Default: aws-apigateway')
