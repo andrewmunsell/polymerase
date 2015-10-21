@@ -3,10 +3,8 @@
 * @copyright 2015 Andrew Munsell <andrew@wizardapps.net>
 */
 
-import {readFileSync, statSync, unlinkSync, writeFileSync} from 'fs';
-import {basename, join, resolve} from 'path';
+import {basename, dirname} from 'path';
 
-import {sync as mkpath} from 'mkpath';
 import {container} from 'needlepoint';
 import {v4 as uuid} from 'node-uuid';
 
@@ -22,7 +20,8 @@ export default function command(folder, options) {
 	}
 
 	var dir = getConfigurationPath(folder);
-	var name = typeof options.name == 'string' ? options.name : basename(dir);
+	var name = typeof options.name == 'string' ? options.name :
+		basename(dirname(dir));
 
 	var defaultConfig = {
 		id: uuid().substr(0, 13),
