@@ -31,7 +31,7 @@ export default function command(folder, options) {
 		return driver.deleteService();
 	})
 	.then(function() {
-		console.log('Destroyed the resources for the service (' + name + ') in ' + dir);
+		console.log('Destroyed the resources for the service (' + config.name + ') in ' + dir);
 	})
 	.catch(function(err) {
 		console.log(err.stack);
