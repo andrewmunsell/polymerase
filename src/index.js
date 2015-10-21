@@ -5,6 +5,10 @@
  * @copyright 2015 Andrew Munsell <andrew@wizardapps.net>
  */
 
+// Load the env from the filesystem in the event the user has specified a .env
+// file in the CWD
+require('dotenv').load({ silent: true });
+
 require('babel/register')({
    optional: ['es7.decorators'],
 
@@ -18,6 +22,7 @@ try {
     require('./program');
 } catch(e) {
     console.error(e);
+		console.error(e.stack);
 
     process.exit(1);
 }

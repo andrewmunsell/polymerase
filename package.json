@@ -1,35 +1,37 @@
 {
-	"name": "polymerase-cli",
-	"version": "1.0.0",
-	"description": "CLI for the Polymerase project",
-	"main": "src/index.js",
-	"bin": {
-		"polymerase": "src/index.js"
-	},
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/andrewmunsell/polymerase.git"
-	},
-	"keywords": [
-		"AWS",
-		"Lambda",
-		"API Gateway",
-		"CLI"
-	],
-	"author": "Andrew Munsell <andrew@wizardapps.net>",
-	"bugs": {
-		"url": "https://github.com/andrewmunsell/polymerase/issues"
-	},
-	"homepage": "https://github.com/andrewmunsell/polymerase#readme",
-	"dependencies": {
-		"babel": "^5.8.23",
-		"bluebird": "^2.10.1",
-		"commander": "^2.8.1",
-		"mkpath": "^0.1.0",
-		"needlepoint": "^1.0.2",
-		"node-uuid": "^1.4.3"
-	}
+  "name": "polymerase-cli",
+  "version": "1.0.0",
+  "description": "CLI for the Polymerase project",
+  "main": "src/index.js",
+  "bin": {
+    "polymerase": "src/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewmunsell/polymerase.git"
+  },
+  "keywords": [
+    "AWS",
+    "Lambda",
+    "API Gateway",
+    "CLI"
+  ],
+  "author": "Andrew Munsell <andrew@wizardapps.net>",
+  "bugs": {
+    "url": "https://github.com/andrewmunsell/polymerase/issues"
+  },
+  "homepage": "https://github.com/andrewmunsell/polymerase#readme",
+  "dependencies": {
+    "babel": "^5.8.23",
+    "bluebird": "^2.10.1",
+    "commander": "^2.8.1",
+    "dotenv": "^1.2.0",
+    "mkpath": "^0.1.0",
+    "needlepoint": "^1.0.2",
+    "node-uuid": "^1.4.3",
+    "polymerase-driver-aws-apigateway": "^1.0.0"
+  }
 }
