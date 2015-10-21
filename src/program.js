@@ -54,6 +54,7 @@ program
 	.command('stage:delete <name>')
 	.description('Delete the specified stage for the service')
 	.option('--service <service>', 'Folder of the service to delete the stage for')
+	.action(require('./commands/stage-delete'));
 
 program
 	.command('stage:list')
