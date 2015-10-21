@@ -30,12 +30,7 @@ export default function command(folder, options) {
 
 		type: 'aws-apigateway',
 
-		stages: {
-			default: 'default',
-			all: [
-				'default'
-			]
-		},
+		stages: ['default'],
 
 		regions: [
 			'us-east-1'

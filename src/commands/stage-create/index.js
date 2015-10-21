@@ -18,7 +18,7 @@ export default function command(name, options) {
 	var config = getConfiguration(options.service);
 	console.log('Found configuration file.');
 
-	config.stages.all.push(name);
+	config.stages.push(name);
 	writeConfiguration(options.service, config);
 
 	console.log('Amended configuration file with new stage.');
