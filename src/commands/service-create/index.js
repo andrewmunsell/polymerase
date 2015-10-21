@@ -12,28 +12,17 @@ import {v4 as uuid} from 'node-uuid';
 
 import Driver from 'polymerase-driver-aws-apigateway';
 
+import {getConfigurationPath, getConfiguration, writeConfiguration} from '../../config';
+
 export default function command(folder, options) {
-	var dir = folder && folder.trim().length ? resolve(folder, '.') : process.cwd();
-	var name = typeof options.name == 'string' ? options.name : basename(dir);
-
-	var configPath = join(dir, 'polymerase.json');
-
 	// We only support API Gateway at this point
 	if(options.type && options.type != 'aws-apigateway') {
 		console.error('You specified an invalid service type.');
 		return process.exit(1);
 	}
 
-	try {
-		var configStat = statSync(configPath);
-
-		console.error('The specified folder is already a Polymerase service.');
-		return process.exit(1);
-	} catch(e) {
-		// The config file probably doesn't exist, so we can create it now.
-	}
-
-	mkpath(dir);
+	var dir = getConfigurationPath(folder);
+	var name = typeof options.name == 'string' ? options.name : basename(dir);
 
 	var defaultConfig = {
 		id: uuid().substr(0, 13),
@@ -64,12 +53,8 @@ export default function command(folder, options) {
 		defaultConfig.description = options.description;
 	}
 
-	writeFileSync(configPath, JSON.stringify(defaultConfig, null, 4), {
-		encoding: 'utf8',
-		flag: 'wx'
-	});
-
-	var config = JSON.parse(readFileSync(configPath, { encoding: 'utf8' }));
+	writeConfiguration(folder, defaultConfig);
+	var config = getConfiguration(folder);
 
 	console.log('Created configuration file.');
 	console.log('Initializing the resources for your ' + config.type + ' service');
