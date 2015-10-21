@@ -22,14 +22,21 @@ program
 	.option('--stage <stage>', 'Stage to deploy to');
 
 program
-	.command('service:region-add <region>')
-	.description('Add the service to the specified region')
-	.option('--service <folder>', 'Folder of the service to add the region for')
+	.command('service:destroy [folder]')
+	.description('Destroy the service and all its resources')
+	.action(require('./commands/service-destroy'));
 
 program
-	.command('service:region-delete <region>')
+	.command('region:add <region>')
+	.description('Add the service to the specified region')
+	.option('--service <folder>', 'Folder of the service to add the region for')
+	.option('--stage <stage>', 'Stage to add the region for')
+
+program
+	.command('region:delete <region>')
 	.description('Remove the service from the specified region')
 	.option('--service <folder>', 'Folder of the service to remove the region for')
+	.option('--stage <stage>', 'Stage to delete the region for')
 
 program
 	.command('stage:create <name>')
