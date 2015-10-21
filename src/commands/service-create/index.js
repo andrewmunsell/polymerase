@@ -73,16 +73,17 @@ export default function command(folder, options) {
 
 	console.log('Created configuration file.');
 	console.log('Initializing the resources for your ' + config.type + ' service');
-	
+
 	Promise.resolve(null)
 	.then(function() {
 		var driver = container.resolve(Driver);
 
-		driver.setServiceContext(config);
-
-		return driver.createService();
+		return driver.createService(config);
 	})
 	.then(function() {
 		console.log('Created a new service (' + name + ') in ' + dir);
+	})
+	.catch(function(err) {
+		console.log(err.stack)
 	});
 };
