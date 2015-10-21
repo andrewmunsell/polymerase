@@ -45,6 +45,6 @@ export function writeConfiguration(folder, configuration) {
 
 	writeFileSync(configPath, JSON.stringify(configuration, null, 4), {
 		encoding: 'utf8',
-		flag: 'wx'
+		flag: 'w'
 	});
 };
