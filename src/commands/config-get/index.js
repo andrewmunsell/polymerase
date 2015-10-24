@@ -15,12 +15,12 @@ import {getConfigurationPath, getConfiguration, writeConfiguration} from '../../
 
 export default function command(key, otherKeys, options) {
 	if(!key) {
-		console.error('You must set as least one KEY=value pair.');
+		console.error('You must get at least one key.');
 		return process.exit(1);
 	}
 
 	if(!options.stage) {
-		console.error('You must specify a stage to set the config for.');
+		console.error('You must specify a stage to get the config for.');
 		return process.exit(1);
 	}
 
