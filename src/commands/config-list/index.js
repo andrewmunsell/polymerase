@@ -5,6 +5,8 @@
 
 import {basename, dirname} from 'path';
 
+import chalk from 'chalk';
+import Promise from 'bluebird';
 import {parse} from 'dotenv';
 import {container} from 'needlepoint';
 import {v4 as uuid} from 'node-uuid';
@@ -36,14 +38,64 @@ export default function command(options) {
 	var driver = container.resolve(Driver);
 	driver.setServiceContext(config);
 
-	driver.getConfigObjects(options.stage, options.region, true)
-		.then((config) => {
-			if(Object.keys(config.Body.data).length < 1) {
-				console.log('There are no configuration values set.');
-			}
+	var regions = [];
 
-			Object.keys(config.Body.data).forEach((key) => {
-				console.log([key, config.Body.data[key]].join('='));
+	var promises = [
+		// Get the stage level configuration
+		driver.getConfigObjects(options.stage, undefined, true)
+	]
+	.concat(config.regions.map((region) => {
+		regions.push(region);
+
+		return driver.getConfigObjects(options.stage, region, true);
+	}));
+
+	Promise.all(promises)
+		.map((config) => {
+			return config.Body.data;
+		})
+		.then((configs) => {
+			var keySet = configs
+				.map((config) => {
+					return Object.keys(config);
+				})
+				.reduce((keySet, configKeys) => {
+					configKeys.forEach((configKey) => {
+						keySet.add(configKey);
+					});
+
+					return keySet;
+				}, new Set());
+
+			keySet.forEach((key) => {
+				if(configs[0].hasOwnProperty(key)) {
+					console.log(chalk.dim('[all] ') + key + '=' + configs[0][key]);
+				} else {
+					console.log(chalk.dim('[all] ' + key));
+				}
+
+				// For each region, display the override
+				regions.forEach((region, i) => {
+					if(!configs[i + 1].hasOwnProperty(key)) {
+						return;
+					}
+
+					var log = '├── ';
+					if(i == regions.length - 1) {
+						// If this is the last item, we use a different line prefix
+						log = '└── ';
+					}
+
+					if(options.region == region) {
+						log += chalk.bold('[' + region + ']');
+					} else {
+						log += chalk.dim('[' + region + ']');
+					}
+
+					log += ' ' + key + '=' + configs[i + 1][key];
+
+					console.log(log);
+				});
 			});
 		});
 };
