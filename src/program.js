@@ -79,10 +79,19 @@ program
 
 program
 	.command('config:list')
-	.description('List the configuration keys. It is not possible to retrieve the values')
+	.description('List all of the configuration values.')
 	.option('--stage <stage>', 'Stage to list the configuration items for')
 	.option('--region <region>', 'Region to list the configuration items for')
 	.option('--service <service>', 'Folder of the service to list the configuration items for')
+	.action(require('./commands/config-list'));
+
+program
+	.command('config:get <key> [otherKeys...]')
+	.description('Get one or more configuration values.')
+	.option('--stage <stage>', 'Stage to get the configuration items for')
+	.option('--region <region>', 'Region to get the configuration items for')
+	.option('--service <service>', 'Folder of the service to get the configuration items for')
+	.action(require('./commands/config-get'));
 
 program
 	.command('config:set <keyValuePair> [otherKeyValuePairs...]')
@@ -90,6 +99,7 @@ program
 	.option('--stage <stage>', 'Stage to change the configuration items for')
 	.option('--region <region>', 'Region to set the configuration items for')
 	.option('--service <service>', 'Folder of the service to set the configuration items for')
+	.action(require('./commands/config-set'));
 
 program
 	.command('config:unset <key> [otherKeys...]')

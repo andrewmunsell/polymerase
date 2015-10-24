@@ -29,6 +29,7 @@
     "bluebird": "^2.10.1",
     "commander": "^2.8.1",
     "dotenv": "^1.2.0",
+    "extend": "^3.0.0",
     "mkpath": "^0.1.0",
     "needlepoint": "^1.0.2",
     "node-uuid": "^1.4.3",
