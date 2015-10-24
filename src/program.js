@@ -107,6 +107,7 @@ program
 	.option('--stage <stage>', 'Stage to change the configuration items for')
 	.option('--region <region>', 'Region to unset the configuration items for')
 	.option('--service <service>', 'Folder of the service to unset the configuration items for')
+	.action(require('./commands/config-unset'));
 
 program.parse(process.argv);
 
