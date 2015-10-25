@@ -62,11 +62,6 @@ program
 	.option('--service <service>', 'Folder of the service to list the stage for')
 
 program
-	.command('stage:set-default <name>')
-	.description('Set the stage as the default for a service')
-	.option('--service <service>', 'Folder of the service to set the default stage for')
-
-program
 	.command('route:create <path>')
 	.description('Create a new route at the specified path relative to the API root')
 	.option('--service <service>', 'Folder of the service to create the route for')
