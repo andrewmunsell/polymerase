@@ -3,8 +3,9 @@
 * @copyright 2015 Andrew Munsell <andrew@wizardapps.net>
 */
 
-import {basename, dirname} from 'path';
+import {basename, dirname, join} from 'path';
 
+import {sync as mkpath} from 'mkpath';
 import {container} from 'needlepoint';
 import {v4 as uuid} from 'node-uuid';
 
@@ -19,9 +20,14 @@ export default function command(folder, options) {
 		return process.exit(1);
 	}
 
-	var dir = getConfigurationPath(folder);
+	var configPath = getConfigurationPath(folder);
 	var name = typeof options.name == 'string' ? options.name :
-		basename(dirname(dir));
+		basename(dirname(configPath));
+
+	// Create the src and test directories for the service, which will hold the
+	// code for the service.
+	mkpath(join(dirname(configPath), 'src'));
+	mkpath(join(dirname(configPath), 'test'));
 
 	var defaultConfig = {
 		id: uuid().substr(0, 13),
@@ -60,7 +66,7 @@ export default function command(folder, options) {
 		return driver.createService(config);
 	})
 	.then(function() {
-		console.log('Created a new service (' + name + ') in ' + dir);
+		console.log('Created a new service (' + name + ') in ' + configPath);
 	})
 	.catch(function(err) {
 		console.log(err.stack)
