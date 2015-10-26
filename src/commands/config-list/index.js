@@ -97,5 +97,10 @@ export default function command(options) {
 					console.log(log);
 				});
 			});
+
+			if(keySet.size < 1) {
+				console.log(chalk.dim('There are no configuration values set for this'
+					+ ' stage.'));
+			}
 		});
 };
