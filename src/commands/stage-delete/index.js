@@ -18,15 +18,15 @@ export default function command(name, options) {
 	var config = getConfiguration(options.service);
 	console.log('Found configuration file.');
 
-	// Validate whether the stage is the default or not
-	if(config.stages.length < 2) {
-		console.error('You cannot delete the only stage of a service.');
-		return process.exit(1);
-	}
-
 	var i = config.stages.indexOf(name);
 	if(i < 0) {
 		console.error('That stage does not exist.');
+		return process.exit(1);
+	}
+
+	// Validate whether the stage is the default or not
+	if(config.stages.length < 2) {
+		console.error('You cannot delete the only stage of a service.');
 		return process.exit(1);
 	}
 
