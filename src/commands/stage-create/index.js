@@ -18,17 +18,18 @@ export default function command(name, options) {
 	var config = getConfiguration(options.service);
 	console.log('Found configuration file.');
 
-	config.stages.push(name);
-	writeConfiguration(options.service, config);
-
-	console.log('Amended configuration file with new stage.');
-
 	Promise.resolve(null)
 	.then(function() {
 		var driver = container.resolve(Driver);
 		driver.setServiceContext(config);
 
 		return driver.createStage(name);
+	})
+	.then(function() {
+		config.stages.push(name);
+		writeConfiguration(options.service, config);
+
+		console.log('Amended configuration file with new stage.');
 	})
 	.then(function() {
 		console.log('Created a new stage (' + name + ') for ' + config.name);
