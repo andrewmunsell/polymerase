@@ -62,9 +62,10 @@ program
 	.option('--service <service>', 'Folder of the service to list the stage for')
 
 program
-	.command('route:create <path>')
+	.command('route:create <method> <path>')
 	.description('Create a new route at the specified path relative to the API root')
 	.option('--service <service>', 'Folder of the service to create the route for')
+	.action(require('./commands/route-create'));
 
 program
 	.command('route:deploy <path>')
